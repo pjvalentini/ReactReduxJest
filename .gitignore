@@ -1,0 +1,19 @@
+#Runtime data
+pids
+*.pid
+*.seed
+
+# Directory for libs generates by jscoverage/JSCover
+node_modules
+
+coverage
+
+.grunt
+
+.lock-wscript
+
+build/release
+
+build
+
+.idea
