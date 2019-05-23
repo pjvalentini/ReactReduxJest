@@ -5,4 +5,4 @@ function Hi() {
     return <p>Hi!</p>
 }
 
-render (<Hi />, document.getElement("app"));
+render(<Hi />, document.getElementById("app"));

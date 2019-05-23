@@ -3,11 +3,14 @@
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -24,12 +27,15 @@
         "react"
     ],
     "rules": {
-        "no-unused-vars" : 2,
-        "no-undef" : 2
+        "no-debugger": "off",
+        "no-console": "off",
+        "no-unused-vars": "warn",
+        "react/prop-types": "warn"
     },
     "settings": {
         "react": {
-            "version": "require('./package.json').dependencies.react"
+            "version": "detect"
         }
-    }
+    },
+    "root": true
 }
