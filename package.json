@@ -19,8 +19,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react-app": "7.0.2",
     "css-loader": "2.1.1",
     "cssnano": "4.1.10",
@@ -54,6 +56,12 @@
     "node": ">=8"
   },
   "babel": {
+    "plugins": [
+      "transform-class-properties",
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
+    ],
     "presets": [
       "babel-preset-react-app"
     ]
