@@ -8,7 +8,7 @@ import PageNotFound from "./Page404NotFound.jsx";
 
 function App() {
     return (
-        <div className="containewr-fluid">
+        <div className="container-fluid">
             <Header />
             <Switch>
                 <Route exact path="/" component={HomePage} />
