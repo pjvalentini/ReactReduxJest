@@ -8,9 +8,9 @@ class CoursesPage extends React.Component {
     }
   };
 
-  // this a class field. We can safely us this but will be standard in +/-2020.
+  // this a class field. We can safely use this but will be standard in +/-2020.
   handleChange = e => {
-    // the spread operator will copy th course from state, and overwrite the title.
+    // the spread operator will copy the course from state, and overwrite the title.
     // with the spread op - the values on the right override those on the left.
     const course = { ...this.state.course, title: e.target.value };
 
@@ -18,9 +18,14 @@ class CoursesPage extends React.Component {
     this.setState({ course });
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    alert(this.state.course.title);
+  };
+
   render() {
     return (
-      <form action="">
+      <form onSubmit={this.handleSubmit}>
         <h2>Courses</h2>
         <h4>Add Course</h4>
         <input
