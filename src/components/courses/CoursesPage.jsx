@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as courseActions from "../../redux/actions/courseActions";
+import PropTypes from "prop-types";
 
 class CoursesPage extends React.Component {
   // we dont need the constructor here or the super(props) as we are using a class property set up here. New Stuff!
@@ -20,7 +23,9 @@ class CoursesPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    alert(this.state.course.title);
+    // dispatch allows us to dispatch our actions (we are dispatching createCourse action, and passing it to the course)
+    this.props.dispatch(courseActions.createCourse(this.state.course));
+    console.log(this.state.course);
   };
 
   render() {
@@ -34,9 +39,27 @@ class CoursesPage extends React.Component {
           value={this.state.course.title}
         />
         <input type="submit" value="Save" />
+        {this.props.courses.map(course => (
+          <div key={course.title}>{course.title}</div>
+        ))}
       </form>
     );
   }
 }
 
-export default CoursesPage;
+// we expect dispatch to be passed in to the courses page component.
+// it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
+CoursesPage.propTypes = {
+  courses: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
+
+// this function determines what part of the state we expose to our component
+// ownProps is an additional param that is a reference to the components own props.
+function mapStateToProps(state) {
+  return {
+    courses: state.courses // be specific reques only the data that the comp needs.
+  };
+}
+
+export default connect(mapStateToProps)(CoursesPage);
