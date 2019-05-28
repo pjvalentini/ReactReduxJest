@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as courseActions from "../../redux/actions/courseActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import CourseList from "./CourseList.jsx";
 
 class CoursesPage extends React.Component {
   componentDidMount() {
@@ -15,9 +16,7 @@ class CoursesPage extends React.Component {
     return (
       <>
         <h2>Courses</h2>
-        {this.props.courses.map(course => (
-          <div key={course.title}>{course.title}</div>
-        ))}
+        <CourseList courses={this.props.courses} />
       </>
     );
   }
@@ -38,8 +37,6 @@ function mapStateToProps(state) {
   };
 }
 
-// Now that we have declared mapDispatchToProps we do not have to pass in dispatch any more as a proptype.
-// We can directly pass in the createCourse action.
 function mapDispatchToProps(dispatch) {
   return {
     // if you don't call dispatch nothing will happen. Actions creator must be called by dispatch.
