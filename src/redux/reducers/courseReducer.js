@@ -1,8 +1,9 @@
+import * as types from "../actions/actionTypes";
 // Default argument syntax, where state is initialized as an empty array
 export default function courseReducer(state = [], action) {
   // Here we create a swtich that looks at the action type
   switch (action.type) {
-    case "CREATE_COURSE":
+    case types.CREATE_COURSE:
       // we return a new copy of state and the passed in course
       // what ever is returned from the reducer becomes the new state for that particular reducer.
       return [...state, { ...action.course }];

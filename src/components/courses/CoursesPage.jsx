@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as courseActions from "../../redux/actions/courseActions";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 
 class CoursesPage extends React.Component {
   // we dont need the constructor here or the super(props) as we are using a class property set up here. New Stuff!
@@ -23,8 +24,7 @@ class CoursesPage extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // dispatch allows us to dispatch our actions (we are dispatching createCourse action, and passing it to the course)
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.actions.createCourse(this.state.course);
     console.log(this.state.course);
   };
 
@@ -51,7 +51,7 @@ class CoursesPage extends React.Component {
 // it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 // this function determines what part of the state we expose to our component
@@ -62,4 +62,17 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CoursesPage);
+// Now that we have declared mapDispatchToProps we do not have to pass in dispatch any more as a proptype.
+// We can directly pass in the createCourse action.
+function mapDispatchToProps(dispatch) {
+  return {
+    // if you don't call dispatch nothing will happen. Actions creator must be called by dispatch.
+    // The cleaner way is to use bindActionCreators and will allow us to not have to manually wrap our actionCreators in a dispatch call.
+    actions: bindActionCreators(courseActions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CoursesPage);
