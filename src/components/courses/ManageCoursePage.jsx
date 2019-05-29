@@ -35,7 +35,25 @@ function ManageCoursePage({
     }
   }, []); // The empty array as the 2nd arg means the effect will run once when the comp mounts.
 
-  return <CourseForm course={course} errors={errors} authors={authors} />;
+  function handleChange(e) {
+    // destructuring here allow us to retain a local ref to the event.
+    const { name, value } = e.target;
+    // using functional form of setState (setCourse) so I can safely set new state that is based on the existing state.
+    setCourse(prevCourse => ({
+      ...prevCourse,
+      // JS computed prop syntax allows us to ref a prop via a var.
+      [name]: name === "authorId" ? parseInt(value, 10) : value // Events return numbers as strings, so we neeed to convert authorId to int here.
+    }));
+  }
+
+  return (
+    <CourseForm
+      course={course}
+      errors={errors}
+      authors={authors}
+      onChange={handleChange}
+    />
+  );
 }
 
 // we expect dispatch to be passed in to the courses page component.
