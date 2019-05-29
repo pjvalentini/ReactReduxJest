@@ -29,6 +29,7 @@ function ManageCoursePage({
         alert("Loading Courses Failed" + error);
       });
     } else {
+      // if we have courses available then we would like to set the state and course passed in on Props.
       setCourse({ ...props.course });
     }
 
@@ -37,7 +38,7 @@ function ManageCoursePage({
         alert("Loading Authors Failed" + error);
       });
     }
-  }, [props.course]); // The empty array as the 2nd arg means the effect will run once when the comp mounts.
+  }, [props.course]); // we want a new state anytime a course is passed in, so we neeed to add this here or else when loading the page or else the prev state will load and no data will be present.
 
   function handleChange(e) {
     // destructuring here allow us to retain a local ref to the event.
