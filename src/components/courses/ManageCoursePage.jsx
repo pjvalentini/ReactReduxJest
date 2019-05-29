@@ -5,6 +5,7 @@ import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import CourseForm from "./CourseForm.jsx";
 import { newCourse } from "../../../tools/mockData";
+import Spinner from "../common/Spinner.jsx";
 
 // This functional componemt uses react hooks, useEffect allows us to handle state and side effects.
 // useState hook
@@ -38,7 +39,7 @@ function ManageCoursePage({
         alert("Loading Authors Failed" + error);
       });
     }
-  }, [props.course]); // we want a new state anytime a course is passed in, so we neeed to add this here or else when loading the page or else the prev state will load and no data will be present.
+  }, [props.course]); // we want a new state anytime a course is passed in, so we need to add this here or else when loading the page or else the prev state will load and no data will be present.
 
   function handleChange(e) {
     // destructuring here allow us to retain a local ref to the event.
@@ -60,7 +61,9 @@ function ManageCoursePage({
     });
   }
 
-  return (
+  return authors.length === 0 || courses.length === 0 ? (
+    <Spinner />
+  ) : (
     <CourseForm
       course={course}
       errors={errors}
