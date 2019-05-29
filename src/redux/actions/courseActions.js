@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import * as courseApi from "../../api/courseApi";
+import { beginApiCall } from "./apiStatusActions";
 
 // Naming conv: verbNoun
 // Requires a type and usually a payload
@@ -19,6 +20,7 @@ export function updateCourseSuccess(course) {
 // loadCourse Thunk
 export function loadCourses() {
   return function(dispatch) {
+    dispatch(beginApiCall());
     return courseApi
       .getCourses()
       .then(courses => {
@@ -33,6 +35,7 @@ export function loadCourses() {
 // saveCourse Thunk
 export function saveCourse(course) {
   return function(dispatch) {
+    dispatch(beginApiCall());
     return courseApi
       .saveCourse(course)
       .then(savedCourse => {
