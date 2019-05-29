@@ -16,6 +16,7 @@ export function updateCourseSuccess(course) {
   return { type: types.UPDATE_COURSE_SUCCESS, course };
 }
 
+// loadCourse Thunk
 export function loadCourses() {
   return function(dispatch) {
     return courseApi
@@ -29,6 +30,7 @@ export function loadCourses() {
   };
 }
 
+// saveCourse Thunk
 export function saveCourse(course) {
   return function(dispatch, getState) {
     return courseApi
