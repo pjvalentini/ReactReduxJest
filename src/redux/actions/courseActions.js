@@ -32,7 +32,7 @@ export function loadCourses() {
 
 // saveCourse Thunk
 export function saveCourse(course) {
-  return function(dispatch, getState) {
+  return function(dispatch) {
     return courseApi
       .saveCourse(course)
       .then(savedCourse => {

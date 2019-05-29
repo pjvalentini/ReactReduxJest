@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import * as courseActions from "../../redux/actions/courseActions";
-import * as authorActions from "../../redux/actions/authorActions";
+import { loadCourses, saveCourse } from "../../redux/actions/courseActions";
+import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import CourseForm from "./CourseForm.jsx";
 import { newCourse } from "../../../tools/mockData";
@@ -15,6 +15,7 @@ function ManageCoursePage({
   authors,
   loadAuthors,
   loadCourses,
+  saveCourse,
   ...props // Assign any props not descructured to a var called props with the rest op.
 }) {
   // useState returns a pair of values, we use array destructuring to assign each value a name.
@@ -46,12 +47,19 @@ function ManageCoursePage({
     }));
   }
 
+  function handleSave(e) {
+    e.preventDefault;
+    // saveCourse is getting passed in on props, so its bound to dispatch.
+    saveCourse(course);
+  }
+
   return (
     <CourseForm
       course={course}
       errors={errors}
       authors={authors}
       onChange={handleChange}
+      onSave={handleSave}
     />
   );
 }
@@ -63,7 +71,8 @@ ManageCoursePage.propTypes = {
   authors: PropTypes.array.isRequired,
   courses: PropTypes.array.isRequired,
   loadCourses: PropTypes.func.isRequired,
-  loadAuthors: PropTypes.func.isRequired
+  loadAuthors: PropTypes.func.isRequired,
+  saveCourse: PropTypes.func.isRequired
 };
 
 // this function determines what part of the state we expose to our component
@@ -79,8 +88,9 @@ function mapStateToProps(state) {
 
 // If we decalre mapDispatchToProps as an object instead, each property will automatically be bound to dispatch.
 const mapDispatchToProps = {
-  loadCourses: courseActions.loadCourses,
-  loadAuthors: authorActions.loadAuthors
+  loadCourses,
+  loadAuthors,
+  saveCourse
 };
 
 export default connect(
