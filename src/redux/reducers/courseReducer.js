@@ -1,6 +1,7 @@
 import * as types from "../actions/actionTypes";
+import initialState from "./initialState";
 // Default argument syntax, where state is initialized as an empty array
-export default function courseReducer(state = [], action) {
+export default function courseReducer(state = initialState.courses, action) {
   // Here we create a swtich that looks at the action type
   switch (action.type) {
     case types.CREATE_COURSE:
