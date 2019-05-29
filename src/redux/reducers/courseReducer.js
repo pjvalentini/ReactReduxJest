@@ -9,6 +9,7 @@ export default function courseReducer(state = initialState.courses, action) {
       // what ever is returned from the reducer becomes the new state for that particular reducer.
       return [...state, { ...action.course }];
     case types.UPDATE_COURSE_SUCCESS:
+      // map return a new array. Replacening the element with the matvhing course.id
       return state.map(course =>
         course.id === action.course.id ? action.course : course
       );
