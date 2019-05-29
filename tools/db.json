@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "title": "React: The Big Picture",
+      "title": "React: The Big Picture, is it really that big dude!",
       "slug": "react-big-picture",
       "authorId": 1,
       "category": "JavaScript"
@@ -72,27 +72,11 @@
     },
     {
       "id": 11,
-      "title": "Test 2",
+      "title": "Test",
       "authorId": 3,
-      "category": "A new Test...to Ridirect",
-      "createdAt": 1559147352970,
-      "slug": "test-2"
-    },
-    {
-      "id": 12,
-      "title": "Test 3",
-      "authorId": 1,
-      "category": "Works!",
-      "createdAt": 1559147441345,
-      "slug": "test-3"
-    },
-    {
-      "id": 13,
-      "title": "Hello",
-      "authorId": 2,
-      "category": "Try again!",
-      "createdAt": 1559147492460,
-      "slug": "hello"
+      "category": "Another test",
+      "createdAt": 1559157900391,
+      "slug": "poop-test"
     }
   ],
   "authors": [

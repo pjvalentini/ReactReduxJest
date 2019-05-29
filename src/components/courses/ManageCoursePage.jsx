@@ -28,6 +28,8 @@ function ManageCoursePage({
       loadCourses().catch(error => {
         alert("Loading Courses Failed" + error);
       });
+    } else {
+      setCourse({ ...props.course });
     }
 
     if (authors.length === 0) {
@@ -35,7 +37,7 @@ function ManageCoursePage({
         alert("Loading Authors Failed" + error);
       });
     }
-  }, []); // The empty array as the 2nd arg means the effect will run once when the comp mounts.
+  }, [props.course]); // The empty array as the 2nd arg means the effect will run once when the comp mounts.
 
   function handleChange(e) {
     // destructuring here allow us to retain a local ref to the event.
@@ -80,14 +82,25 @@ ManageCoursePage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
+export function getCourseBySlug(courses, slug) {
+  return courses.find(course => course.slug === slug) || null;
+}
+
 // this function determines what part of the state we expose to our component
-// ownProps is an additional param that is a reference to the components own props.
-function mapStateToProps(state) {
-  // be specific request only the data that the comp needs.
+// ownProps: additional param that is a reference to the components props.
+// Can be used to read the URL data injected on props by React router.
+function mapStateToProps(state, ownProps) {
+  // read the course slug.
+  const slug = ownProps.match.params.slug;
+  // if there is a slug AND state.courses.length > 0 => getCourseBySlug otherwise set to newCourse.
+  const course =
+    slug && state.courses.length > 0
+      ? getCourseBySlug(state.courses, slug)
+      : newCourse;
   return {
+    course,
     courses: state.courses,
-    authors: state.authors,
-    course: newCourse
+    authors: state.authors
   };
 }
 
