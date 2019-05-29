@@ -16,6 +16,7 @@ function ManageCoursePage({
   loadAuthors,
   loadCourses,
   saveCourse,
+  history,
   ...props // Assign any props not descructured to a var called props with the rest op.
 }) {
   // useState returns a pair of values, we use array destructuring to assign each value a name.
@@ -48,9 +49,12 @@ function ManageCoursePage({
   }
 
   function handleSave(e) {
-    e.preventDefault;
+    e.preventDefault();
     // saveCourse is getting passed in on props, so its bound to dispatch.
-    saveCourse(course);
+    // saveCourse return a promise so we can use React Router's 'history' object to redirect.
+    saveCourse(course).then(() => {
+      history.push("/courses");
+    });
   }
 
   return (
@@ -72,7 +76,8 @@ ManageCoursePage.propTypes = {
   courses: PropTypes.array.isRequired,
   loadCourses: PropTypes.func.isRequired,
   loadAuthors: PropTypes.func.isRequired,
-  saveCourse: PropTypes.func.isRequired
+  saveCourse: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 // this function determines what part of the state we expose to our component
