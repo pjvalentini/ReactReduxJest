@@ -1,12 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as courseActions from "../../redux/actions/courseActions";
 import * as authorActions from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
+import CourseForm from "./CourseForm.jsx";
+import { newCourse } from "../../../tools/mockData";
 
-// This functional componemt uses react hooks
-function ManageCoursePage(courses, authors, loadAuthors, loadCourses) {
-  // hooks allow us to handle state and side effects.
+// This functional componemt uses react hooks, useEffect allows us to handle state and side effects.
+// useState hook
+// Our form field will need state in order to hold the form field values before they are saved.
+// I dont need to use redux here, Use plain React state foir data only one/few components use like form state.
+function ManageCoursePage({
+  courses,
+  authors,
+  loadAuthors,
+  loadCourses,
+  ...props // Assign any props not descructured to a var called props with the rest op.
+}) {
+  // useState returns a pair of values, we use array destructuring to assign each value a name.
+  // 1st value is the state var, 2nd value is the setter fucntion for that var.
+  const [course, setCourse] = useState({ ...props.course });
+  const [errors, setErrors] = useState({});
   useEffect(() => {
     if (courses.length === 0) {
       loadCourses().catch(error => {
@@ -21,16 +35,13 @@ function ManageCoursePage(courses, authors, loadAuthors, loadCourses) {
     }
   }, []); // The empty array as the 2nd arg means the effect will run once when the comp mounts.
 
-  return (
-    <>
-      <h2>Manage Course</h2>
-    </>
-  );
+  return <CourseForm course={course} errors={errors} authors={authors} />;
 }
 
 // we expect dispatch to be passed in to the courses page component.
 // it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
 ManageCoursePage.propTypes = {
+  course: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
   courses: PropTypes.array.isRequired,
   loadCourses: PropTypes.func.isRequired,
@@ -43,7 +54,8 @@ function mapStateToProps(state) {
   // be specific request only the data that the comp needs.
   return {
     courses: state.courses,
-    authors: state.authors
+    authors: state.authors,
+    course: newCourse
   };
 }
 
