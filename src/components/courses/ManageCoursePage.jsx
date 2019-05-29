@@ -4,7 +4,9 @@ import * as courseActions from "../../redux/actions/courseActions";
 import * as authorActions from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 
+// This functional componemt uses react hooks
 function ManageCoursePage(courses, authors, loadAuthors, loadCourses) {
+  // hooks allow us to handle state and side effects.
   useEffect(() => {
     if (courses.length === 0) {
       loadCourses().catch(error => {
