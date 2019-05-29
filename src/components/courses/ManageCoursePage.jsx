@@ -24,6 +24,8 @@ function ManageCoursePage({
   // 1st value is the state var, 2nd value is the setter fucntion for that var.
   const [course, setCourse] = useState({ ...props.course });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
+
   useEffect(() => {
     if (courses.length === 0) {
       loadCourses().catch(error => {
@@ -54,6 +56,8 @@ function ManageCoursePage({
 
   function handleSave(e) {
     e.preventDefault();
+    // setSaving is true now as we want to hide the save button while an update is being set.
+    setSaving(true);
     // saveCourse is getting passed in on props, so its bound to dispatch.
     // saveCourse return a promise so we can use React Router's 'history' object to redirect.
     saveCourse(course).then(() => {
@@ -70,6 +74,7 @@ function ManageCoursePage({
       authors={authors}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }
