@@ -55,8 +55,26 @@ function ManageCoursePage({
     }));
   }
 
+  // this function will povide some server side validation
+  function formIsValid() {
+    const { title, authorId, category } = course;
+    const errors = {};
+
+    if (!title) errors.title = "Title is required.";
+    if (!authorId) errors.author = "Author is required.";
+    if (!category) errors.category = "Category is required.";
+
+    // set errors will update state if there are any.
+    setErrors(errors);
+    // Form is valid sit he error object still has no props.
+    // This will return onject of properties if there are errors.
+    return Object.keys(errors).length === 0;
+  }
+
   function handleSave(e) {
     e.preventDefault();
+    // if form is not valid return the errors
+    if (!formIsValid()) return;
     // setSaving is true now as we want to hide the save button while an update is being set.
     setSaving(true);
     // saveCourse is getting passed in on props, so its bound to dispatch.
