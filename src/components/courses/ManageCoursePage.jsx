@@ -61,10 +61,16 @@ function ManageCoursePage({
     setSaving(true);
     // saveCourse is getting passed in on props, so its bound to dispatch.
     // saveCourse return a promise so we can use React Router's 'history' object to redirect.
-    saveCourse(course).then(() => {
-      toast.success("You have saved your changes!");
-      history.push("/courses");
-    });
+    saveCourse(course)
+      .then(() => {
+        toast.success("You have saved your changes!");
+        history.push("/courses");
+      })
+      .catch(error => {
+        ///here we set save to false since we are going to stay on the page
+        setSaving(false);
+        setErrors({ onSave: error.message }); // comming from the useState() call.
+      });
   }
 
   return authors.length === 0 || courses.length === 0 ? (

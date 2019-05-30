@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as authorApi from "../../api/authorApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 // Naming conv: verbNoun
 // Requires a type and usually a payload
@@ -17,6 +17,8 @@ export function loadAuthors() {
         dispatch(loadAuthorsSuccess(authors));
       })
       .catch(error => {
+        // dispatching error message here.
+        dispatch(apiCallError(error));
         throw error;
       });
   };
