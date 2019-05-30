@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import CourseForm from "./CourseForm.jsx";
 import { newCourse } from "../../../tools/mockData";
 import Spinner from "../common/Spinner.jsx";
+import { toast } from "react-toastify";
 
 // This functional componemt uses react hooks, useEffect allows us to handle state and side effects.
 // useState hook
@@ -61,6 +62,7 @@ function ManageCoursePage({
     // saveCourse is getting passed in on props, so its bound to dispatch.
     // saveCourse return a promise so we can use React Router's 'history' object to redirect.
     saveCourse(course).then(() => {
+      toast.success("You have saved your changes!");
       history.push("/courses");
     });
   }
