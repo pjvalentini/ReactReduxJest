@@ -15,6 +15,9 @@ export default function courseReducer(state = initialState.courses, action) {
       );
     case types.LOAD_COURSES_SUCCESS:
       return action.courses;
+    case types.DELETE_COURSE_OPTIMISTIC:
+      // this will return an array of all the courses, but with the deleted course omitted.  We return an array with one less course.
+      return state.filter(course => course.id !== action.course.id);
     default:
       // if the reducer recieves an action that it doesn't care about then is should return the default state.
       return state;

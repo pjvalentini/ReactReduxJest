@@ -69,14 +69,6 @@
       "slug": "web-components-shadow-dom",
       "authorId": 1,
       "category": "HTML5"
-    },
-    {
-      "id": 11,
-      "title": "Test 2",
-      "authorId": 1,
-      "category": "Testing...",
-      "createdAt": 1559244170505,
-      "slug": "test"
     }
   ],
   "authors": [

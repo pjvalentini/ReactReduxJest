@@ -17,6 +17,10 @@ export function updateCourseSuccess(course) {
   return { type: types.UPDATE_COURSE_SUCCESS, course };
 }
 
+export function deleteCourseOptimistic(course) {
+  return { type: types.DELETE_COURSE_OPTIMISTIC, course };
+}
+
 // loadCourse Thunk
 export function loadCourses() {
   return function(dispatch) {
@@ -50,5 +54,15 @@ export function saveCourse(course) {
         dispatch(apiCallError(error));
         throw error;
       });
+  };
+}
+
+// deleteCourse Thunk
+export function deleteCourse(course) {
+  return function(dispatch) {
+    // Optimistic delete, so not dispatching begin/end api all
+    // actions, or apiCallError action since we are not showing the loading status fo this.
+    dispatch(deleteCourseOptimistic(course));
+    return courseApi.deleteCourse(course.id);
   };
 }
