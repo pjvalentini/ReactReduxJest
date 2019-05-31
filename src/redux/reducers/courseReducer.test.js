@@ -1,6 +1,5 @@
 import courseReducer from "./courseReducer";
 import * as actions from "../actions/courseActions";
-import { combineReducers } from "redux";
 
 // Test on how the reducer will handle the createCourse Action
 // we dont need all the properties, just an array and a couple of items to test the behavior
