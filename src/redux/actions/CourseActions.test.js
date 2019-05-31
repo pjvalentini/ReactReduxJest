@@ -38,7 +38,7 @@ describe("Async Actions", () => {
 });
 
 // using arrange/assert/act pattern
-// this test confirms that when I call the createCourseSuccess action creator, I get the expected onject shape back.
+// this test confirms that when I call the createCourseSuccess action creator, I get the expected object shape back.
 describe("createCourseSuccess", () => {
   it("Should create a CREATE_COURSE_SUCCESS action", () => {
     // arrange the test
