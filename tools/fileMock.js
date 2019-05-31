@@ -1,2 +1,2 @@
-// Mocks file imports imports for Jest. Suggested by https://jestjs.io/docs/en/webpack
+// Mocks file imports for Jest. Suggested by https://jestjs.io/docs/en/webpack
 module.export = "test-file-stub";
