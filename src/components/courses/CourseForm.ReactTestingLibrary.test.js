@@ -1,3 +1,4 @@
+// RTL
 import React from "react";
 import { cleanup, render } from "react-testing-library";
 import CourseForm from "./CourseForm.jsx";
@@ -33,6 +34,6 @@ it("labels save button as Save when not saving", () => {
 
 it("labels save button as Saving... when saving", () => {
   const { getByText, debug } = renderCourseForm({ saving: true });
-  debug();
+  // debug(); // i can see my output from the call to render.
   getByText("Saving...");
 });

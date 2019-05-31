@@ -12,7 +12,9 @@ import { toast } from "react-toastify";
 // useState hook
 // Our form field will need state in order to hold the form field values before they are saved.
 // I dont need to use redux here, Use plain React state foir data only one/few components use like form state.
-function ManageCoursePage({
+// adding export here will allow us to test this directly without using redux's Provider ans store.
+// This exports an un connected version of the component
+export function ManageCoursePage({
   courses,
   authors,
   loadAuthors,
@@ -146,6 +148,7 @@ const mapDispatchToProps = {
   saveCourse
 };
 
+// this is exporting the connected version of this component ad the default export.
 export default connect(
   mapStateToProps,
   mapDispatchToProps
