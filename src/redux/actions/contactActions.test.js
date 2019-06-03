@@ -1,6 +1,6 @@
-import * as courseActions from "./courseActions";
+import * as contactActions from "./contactActions";
 import * as types from "./actionTypes";
-import { courses } from "../../../tools/mockData";
+import { contacts } from "../../../tools/mockData";
 // for testing thunks we need some additional imports
 import thunk from "redux-thunk";
 import fetchMock from "fetch-mock"; // for mocking fetch calls
@@ -15,22 +15,22 @@ describe("Async Actions", () => {
     fetchMock.restore();
   });
 
-  describe("Load Courses Thunk", () => {
-    it("should create BEGIN_API_CALL and LOAD_COURSES_SUCCESS when loading courses", () => {
+  describe("Load Contacts Thunk", () => {
+    it("should create BEGIN_API_CALL and LOAD_CONTACTS_SUCCESS when loading courses", () => {
       // captures all fetch calls and the response is mock data.
       fetchMock.mock("*", {
-        body: courses,
+        body: contacts,
         headers: { "content-type": "application/json" }
       });
 
       // assert that both of loadCourses() thunk will call these two actions when loading courses
       const expectedActions = [
         { type: types.BEGIN_API_CALL },
-        { type: types.LOAD_COURSES_SUCCESS, courses }
+        { type: types.LOAD_CONTACTS_SUCCESS, contacts }
       ];
 
       const store = mockStore({ courses: [] });
-      return store.dispatch(courseActions.loadCourses()).then(() => {
+      return store.dispatch(contactActions.loadContacts()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
     });
@@ -39,17 +39,17 @@ describe("Async Actions", () => {
 
 // using arrange/assert/act pattern
 // this test confirms that when I call the createCourseSuccess action creator, I get the expected object shape back.
-describe("createCourseSuccess", () => {
-  it("Should create a CREATE_COURSE_SUCCESS action", () => {
+describe("createContactSuccess", () => {
+  it("Should create a CREATE_CONTACT_SUCCESS action", () => {
     // arrange the test
-    const course = courses[0];
+    const contact = contacts[0];
     const expectedAction = {
-      type: types.CREATE_COURSE_SUCCESS,
-      course
+      type: types.CREATE_CONTACT_SUCCESS,
+      contact
     };
 
     //act
-    const action = courseActions.createCourseSuccess(course);
+    const action = contactActions.createContactSuccess(contact);
     // console.log(expectedAction);
 
     // assert

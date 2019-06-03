@@ -1,92 +1,99 @@
-const courses = [
+const contacts = [
   {
     id: 1,
-    title: "Securing React Apps with Auth0",
-    slug: "react-auth0-authentication-security",
-    authorId: 1,
-    category: "JavaScript"
+    name: "John Doe",
+    slug: "John Doe",
+    creatorId: 3,
+    category: "John@Doe.com"
   },
   {
     id: 2,
-    title: "React: The Big Picture",
-    slug: "react-big-picture",
-    authorId: 1,
-    category: "JavaScript"
+    name: "Jane Doe",
+    slug: "Jane Doe",
+    creatorId: 1,
+    category: "Jane@Doe.com"
   },
   {
     id: 3,
-    title: "Creating Reusable React Components",
-    slug: "react-creating-reusable-components",
-    authorId: 1,
-    category: "JavaScript"
+    name: "Bill Clinton",
+    slug: "Bill Clinton",
+    creatorId: 2,
+    category: "potus@gmail.com"
   },
   {
     id: 4,
-    title: "Building a JavaScript Development Environment",
-    slug: "javascript-development-environment",
-    authorId: 1,
-    category: "JavaScript"
+    name: "LeBron James",
+    slug: "Lebron James",
+    creatorId: 2,
+    category: "kingJames@gmail.com"
   },
   {
     id: 5,
-    title: "Building Applications with React and Redux",
-    slug: "react-redux-react-router-es6",
-    authorId: 1,
-    category: "JavaScript"
+    name: "Wayne Gretzky",
+    slug: "Wayne Gretzky",
+    creatorId: 1,
+    category: "greatone@gmail.com"
   },
   {
     id: 6,
-    title: "Building Applications in React and Flux",
-    slug: "react-flux-building-applications",
-    authorId: 1,
-    category: "JavaScript"
+    name: "Ted Dead",
+    slug: "Ted Dead",
+    creatorId: 1,
+    category: "Ted@Dead.com"
   },
   {
     id: 7,
-    title: "Clean Code: Writing Code for Humans",
-    slug: "writing-clean-code-humans",
-    authorId: 1,
-    category: "Software Practices"
+    name: "Wilt Chamberlin",
+    slug: "Wilt Chamberlin",
+    creatorId: 1,
+    category: "wilt@theStilt"
   },
   {
     id: 8,
-    title: "Architecting Applications for the Real World",
-    slug: "architecting-applications-dotnet",
-    authorId: 1,
-    category: "Software Architecture"
+    name: "Sam Ashe",
+    slug: "Sam Ashe",
+    creatorId: 1,
+    category: "Sam@Ashe.com"
   },
   {
     id: 9,
-    title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    slug: "career-reboot-for-developer-mind",
-    authorId: 1,
-    category: "Career"
+    name: "Mario Mario",
+    slug: "Mario Mario",
+    creatorId: 3,
+    category: "marioM@gmail.com"
   },
   {
     id: 10,
-    title: "Web Component Fundamentals",
-    slug: "web-components-shadow-dom",
-    authorId: 1,
-    category: "HTML5"
+    name: "Scottie Pippen",
+    slug: "Scottie Pippen",
+    creatorId: 1,
+    category: "SP@outlook.com"
   }
 ];
 
-const authors = [
-  { id: 1, name: "Abe Lincoln" },
-  { id: 2, name: "Joe Shmo" },
-  { id: 3, name: "Jane Doe" }
+const creators = [
+  { id: 1, name: "Lea Collins" },
+  { id: 2, name: "Kent Elmer" },
+  { id: 3, name: "PJ Valentini" },
+  { id: 4, name: "Paula Speakman" },
+  { id: 5, name: "Robert Blackstone" },
+  { id: 6, name: "Adam Cornett" },
+  { id: 7, name: "Dan Jewell" },
+  { id: 8, name: "Jeff Riedinger" },
+  { id: 9, name: "Diva Payne" },
+  { id: 10, name: "Amy Johnson" }
 ];
 
-const newCourse = {
+const newContact = {
   id: null,
-  title: "",
-  authorId: null,
+  name: "",
+  creatorId: null,
   category: ""
 };
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
-  newCourse,
-  courses,
-  authors
+  newContact,
+  contacts,
+  creators
 };

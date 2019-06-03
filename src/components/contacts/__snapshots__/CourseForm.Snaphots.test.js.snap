@@ -53,17 +53,17 @@ exports[`sets save button label to 'Save' when saving is false 1`] = `
         <option
           value={1}
         >
-          Abe Lincoln
+          Lea Collins
         </option>
         <option
           value={2}
         >
-          Joe Shmo
+          Kent Elmer
         </option>
         <option
           value={3}
         >
-          Jane Doe
+          PJ Valentini
         </option>
       </select>
     </div>
@@ -151,17 +151,17 @@ exports[`sets save button label to 'Saving...' when saving is true 1`] = `
         <option
           value={1}
         >
-          Abe Lincoln
+          Lea Collins
         </option>
         <option
           value={2}
         >
-          Joe Shmo
+          Kent Elmer
         </option>
         <option
           value={3}
         >
-          Jane Doe
+          PJ Valentini
         </option>
       </select>
     </div>

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput.jsx";
 import SelectInput from "../common/SelectInput.jsx";
 
-const CourseForm = ({
-  course,
-  authors,
+const ContactForm = ({
+  contact,
+  creators,
   onSave,
   onChange,
   saving = false,
@@ -13,39 +13,39 @@ const CourseForm = ({
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{course.id ? "Edit" : "Add"} Course</h2>
+      <h2>{contact.id ? "Edit" : "Add"} Contact</h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
         </div>
       )}
       <TextInput
-        name="title"
-        label="Title"
-        value={course.title}
+        name="name"
+        label="Name"
+        value={contact.name}
         onChange={onChange}
-        error={errors.title}
-      />
-
-      <SelectInput
-        name="authorId"
-        label="Author"
-        value={course.authorId || ""}
-        defaultOption="Select Author"
-        options={authors.map(author => ({
-          value: author.id,
-          text: author.name
-        }))}
-        onChange={onChange}
-        error={errors.author}
+        error={errors.name}
       />
 
       <TextInput
         name="category"
-        label="Category"
-        value={course.category}
+        label="Email"
+        value={contact.category}
         onChange={onChange}
         error={errors.category}
+      />
+
+      <SelectInput
+        name="creatorId"
+        label="Created By"
+        value={contact.creatorId || ""}
+        defaultOption="Select Creator"
+        options={creators.map(creator => ({
+          value: creator.id,
+          text: creator.name
+        }))}
+        onChange={onChange}
+        error={errors.creator}
       />
 
       <button type="submit" disabled={saving} className="btn btn-primary">
@@ -55,13 +55,13 @@ const CourseForm = ({
   );
 };
 
-CourseForm.propTypes = {
-  authors: PropTypes.array.isRequired,
-  course: PropTypes.object.isRequired,
+ContactForm.propTypes = {
+  creators: PropTypes.array.isRequired,
+  contact: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool
 };
 
-export default CourseForm;
+export default ContactForm;

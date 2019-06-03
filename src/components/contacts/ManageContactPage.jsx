@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { loadCourses, saveCourse } from "../../redux/actions/courseActions";
-import { loadAuthors } from "../../redux/actions/authorActions";
+import { loadContacts, saveContact } from "../../redux/actions/contactActions";
+import { loadCreators } from "../../redux/actions/creatorActions";
 import PropTypes from "prop-types";
-import CourseForm from "./CourseForm.jsx";
-import { newCourse } from "../../../tools/mockData";
+import ContactForm from "./ContactForm.jsx";
+import { newContact } from "../../../tools/mockData";
 import Spinner from "../common/Spinner.jsx";
 import { toast } from "react-toastify";
 
@@ -14,57 +14,57 @@ import { toast } from "react-toastify";
 // I dont need to use redux here, Use plain React state foir data only one/few components use like form state.
 // adding export here will allow us to test this directly without using redux's Provider ans store.
 // This exports an un connected version of the component
-export function ManageCoursePage({
-  courses,
-  authors,
-  loadAuthors,
-  loadCourses,
-  saveCourse,
+export function ManageContactPage({
+  contacts,
+  creators,
+  loadCreators,
+  loadContacts,
+  saveContact,
   history,
   ...props // Assign any props not descructured to a var called props with the rest op.
 }) {
   // useState returns a pair of values, we use array destructuring to assign each value a name.
   // 1st value is the state var, 2nd value is the setter fucntion for that var.
-  const [course, setCourse] = useState({ ...props.course });
+  const [contact, setContact] = useState({ ...props.contact });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (courses.length === 0) {
-      loadCourses().catch(error => {
-        alert("Loading Courses Failed" + error);
+    if (contacts.length === 0) {
+      loadContacts().catch(error => {
+        alert("Loading Contacts Failed" + error);
       });
     } else {
       // if we have courses available then we would like to set the state and course passed in on Props.
-      setCourse({ ...props.course });
+      setContact({ ...props.contact });
     }
 
-    if (authors.length === 0) {
-      loadAuthors().catch(error => {
-        alert("Loading Authors Failed" + error);
+    if (creators.length === 0) {
+      loadCreators().catch(error => {
+        alert("Loading Creators Failed" + error);
       });
     }
-  }, [props.course]); // we want a new state anytime a course is passed in, so we need to add this here or else when loading the page or else the prev state will load and no data will be present.
+  }, [props.contact]); // we want a new state anytime a course is passed in, so we need to add this here or else when loading the page or else the prev state will load and no data will be present.
 
   function handleChange(e) {
     // destructuring here allow us to retain a local ref to the event.
     const { name, value } = e.target;
     // using functional form of setState (setCourse) so I can safely set new state that is based on the existing state.
-    setCourse(prevCourse => ({
-      ...prevCourse,
+    setContact(prevContact => ({
+      ...prevContact,
       // JS computed prop syntax allows us to ref a prop via a var.
-      [name]: name === "authorId" ? parseInt(value, 10) : value // Events return numbers as strings, so we neeed to convert authorId to int here.
+      [name]: name === "creatorId" ? parseInt(value, 10) : value // Events return numbers as strings, so we neeed to convert authorId to int here.
     }));
   }
 
   // this function will povide some server side validation
   function formIsValid() {
-    const { title, authorId, category } = course;
+    const { name, creatorId, category } = contact;
     const errors = {};
 
-    if (!title) errors.title = "Title is required.";
-    if (!authorId) errors.author = "Author is required.";
-    if (!category) errors.category = "Category is required.";
+    if (!name) errors.name = "Name is required.";
+    if (!creatorId) errors.creator = "Creator is required.";
+    if (!category) errors.category = "Email is required.";
 
     // set errors will update state if there are any.
     setErrors(errors);
@@ -81,10 +81,10 @@ export function ManageCoursePage({
     setSaving(true);
     // saveCourse is getting passed in on props, so its bound to dispatch.
     // saveCourse return a promise so we can use React Router's 'history' object to redirect.
-    saveCourse(course)
+    saveContact(contact)
       .then(() => {
         toast.success("You have saved your changes!");
-        history.push("/courses");
+        history.push("/contacts");
       })
       .catch(error => {
         ///here we set save to false since we are going to stay on the page
@@ -93,13 +93,13 @@ export function ManageCoursePage({
       });
   }
 
-  return authors.length === 0 || courses.length === 0 ? (
+  return creators.length === 0 || contacts.length === 0 ? (
     <Spinner />
   ) : (
-    <CourseForm
-      course={course}
+    <ContactForm
+      contact={contact}
       errors={errors}
-      authors={authors}
+      creators={creators}
       onChange={handleChange}
       onSave={handleSave}
       saving={saving}
@@ -109,18 +109,18 @@ export function ManageCoursePage({
 
 // we expect dispatch to be passed in to the courses page component.
 // it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
-ManageCoursePage.propTypes = {
-  course: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired,
-  courses: PropTypes.array.isRequired,
-  loadCourses: PropTypes.func.isRequired,
-  loadAuthors: PropTypes.func.isRequired,
-  saveCourse: PropTypes.func.isRequired,
+ManageContactPage.propTypes = {
+  contact: PropTypes.object.isRequired,
+  creators: PropTypes.array.isRequired,
+  contacts: PropTypes.array.isRequired,
+  loadContacts: PropTypes.func.isRequired,
+  loadCreators: PropTypes.func.isRequired,
+  saveContact: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };
 
-export function getCourseBySlug(courses, slug) {
-  return courses.find(course => course.slug === slug) || null;
+export function getContactBySlug(contacts, slug) {
+  return contacts.find(contact => contact.slug === slug) || null;
 }
 
 // this function determines what part of the state we expose to our component
@@ -130,26 +130,26 @@ function mapStateToProps(state, ownProps) {
   // read the course slug.
   const slug = ownProps.match.params.slug;
   // if there is a slug AND state.courses.length > 0 => getCourseBySlug otherwise set to newCourse.
-  const course =
-    slug && state.courses.length > 0
-      ? getCourseBySlug(state.courses, slug)
-      : newCourse;
+  const contact =
+    slug && state.contacts.length > 0
+      ? getContactBySlug(state.contacts, slug)
+      : newContact;
   return {
-    course,
-    courses: state.courses,
-    authors: state.authors
+    contact,
+    contacts: state.contacts,
+    creators: state.creators
   };
 }
 
 // If we decalre mapDispatchToProps as an object instead, each property will automatically be bound to dispatch.
 const mapDispatchToProps = {
-  loadCourses,
-  loadAuthors,
-  saveCourse
+  loadContacts,
+  loadCreators,
+  saveContact
 };
 
 // this is exporting the connected version of this component ad the default export.
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ManageCoursePage);
+)(ManageContactPage);

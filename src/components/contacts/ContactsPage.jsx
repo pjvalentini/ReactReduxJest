@@ -1,39 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as courseActions from "../../redux/actions/courseActions";
-import * as authorActions from "../../redux/actions/authorActions";
+import * as contactActions from "../../redux/actions/contactActions";
+import * as creatorActions from "../../redux/actions/creatorActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import CourseList from "./CourseList.jsx";
+import ContactList from "./ContactList.jsx";
 import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner.jsx";
 import { toast } from "react-toastify";
 
-class CoursesPage extends React.Component {
+class ContactsPage extends React.Component {
   state = {
     redirectToAddCoursePage: false
   };
 
   componentDidMount() {
-    const { courses, authors, actions } = this.props;
-    if (courses.length === 0) {
-      actions.loadCourses().catch(error => {
-        alert("Loading Courses Failed" + error);
+    const { contacts, creators, actions } = this.props;
+    if (contacts.length === 0) {
+      actions.loadContacts().catch(error => {
+        alert("Loading Contacts Failed" + error);
       });
     }
 
-    if (authors.length === 0) {
-      actions.loadAuthors().catch(error => {
-        alert("Loading Authors Failed" + error);
+    if (creators.length === 0) {
+      actions.loadCreators().catch(error => {
+        alert("Loading Creators Failed" + error);
       });
     }
   }
 
   // handleDelete method converted to use async/await
-  handleDeleteCourse = async course => {
-    toast.success("Course Deleted!");
+  handleDeleteContact = async contact => {
+    toast.success("Contact Deleted!");
     try {
-      await this.props.actions.deleteCourse(course);
+      await this.props.actions.deleteContact(contact);
     } catch (error) {
       toast.error("Delete Failed! " + error.message, { autoClose: false });
     }
@@ -43,9 +43,9 @@ class CoursesPage extends React.Component {
     return (
       <>
         {/*Here we can use the redirect here */}
-        {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
-        <h2>Courses</h2>
-        {/* This is saying that either load our spinner or showe the button and list */}
+        {this.state.redirectToAddContactPage && <Redirect to="/contact" />}
+        <h2>Contacts</h2>
+        {/* This is saying that either load our spinner or show the button and list */}
         {this.props.loading ? (
           <Spinner />
         ) : (
@@ -53,13 +53,13 @@ class CoursesPage extends React.Component {
             <button
               style={{ marginBottom: 20 }}
               className="btn btn-primary add-course"
-              onClick={() => this.setState({ redirectToAddCoursePage: true })} // add this value to state
+              onClick={() => this.setState({ redirectToAddContactPage: true })} // add this value to state
             >
-              Add Course
+              Add Contact
             </button>
-            <CourseList
-              onDeleteClick={this.handleDeleteCourse}
-              courses={this.props.courses}
+            <ContactList
+              onDeleteClick={this.handleDeleteContact}
+              contacts={this.props.contacts}
             />
           </>
         )}
@@ -70,9 +70,9 @@ class CoursesPage extends React.Component {
 
 // we expect dispatch to be passed in to the courses page component.
 // it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
-CoursesPage.propTypes = {
-  authors: PropTypes.array.isRequired,
-  courses: PropTypes.array.isRequired,
+ContactsPage.propTypes = {
+  creators: PropTypes.array.isRequired,
+  contacts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
@@ -82,16 +82,18 @@ CoursesPage.propTypes = {
 function mapStateToProps(state) {
   // be specific request only the data that the comp needs.
   return {
-    courses:
-      state.authors.length === 0
+    contacts:
+      state.creators.length === 0
         ? []
-        : state.courses.map(course => {
+        : state.contacts.map(contact => {
             return {
-              ...course,
-              authorName: state.authors.find(a => a.id === course.authorId).name
+              ...contact,
+              creatorName: state.creators.find(
+                cn => cn.id === contact.creatorId
+              ).name
             };
           }),
-    authors: state.authors,
+    creators: state.creators,
     loading: state.apiCallsInProgress > 0
   };
 }
@@ -101,9 +103,9 @@ function mapDispatchToProps(dispatch) {
     // if you don't call dispatch nothing will happen. Actions creator must be called by dispatch.
     // The cleaner way is to use bindActionCreators and will allow us to not have to manually wrap our actionCreators in a dispatch call.
     actions: {
-      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
-      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
-      deleteCourse: bindActionCreators(courseActions.deleteCourse, dispatch)
+      loadContacts: bindActionCreators(contactActions.loadContacts, dispatch),
+      loadCreators: bindActionCreators(creatorActions.loadCreators, dispatch),
+      deleteContact: bindActionCreators(contactActions.deleteContact, dispatch)
     }
   };
 }
@@ -111,4 +113,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CoursesPage);
+)(ContactsPage);
