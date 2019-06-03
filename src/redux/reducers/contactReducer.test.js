@@ -47,7 +47,7 @@ it("should UPDATE a course when passed UPDATE_CONTACT_SUCCESS", () => {
   const nonUpdatedContact = newState.find(a => a.id == 1);
 
   // Assert
-  expect(updatedContact.title).toEqual("New B");
-  expect(nonUpdatedContact.title).toEqual("A");
+  expect(updatedContact.name).toEqual("New B");
+  expect(nonUpdatedContact.name).toEqual("A");
   expect(newState.length).toEqual(3);
 });

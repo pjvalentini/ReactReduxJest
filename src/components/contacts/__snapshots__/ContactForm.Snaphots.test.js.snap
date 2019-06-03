@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets save button label to 'Save' when saving is false 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <h2>
+    Edit
+     Contact
+  </h2>
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <div
+      className="field"
+    >
+      <input
+        className="form-control"
+        name="name"
+        onChange={[MockFunction]}
+        type="text"
+        value="John Doe"
+      />
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="category"
+    >
+      Email
+    </label>
+    <div
+      className="field"
+    >
+      <input
+        className="form-control"
+        name="category"
+        onChange={[MockFunction]}
+        type="text"
+        value="John@Doe.com"
+      />
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="creatorId"
+    >
+      Created By
+    </label>
+    <div
+      className="field"
+    >
+      <select
+        className="form-control"
+        name="creatorId"
+        onChange={[MockFunction]}
+        value={3}
+      >
+        <option
+          value=""
+        >
+          Select Creator
+        </option>
+        <option
+          value={1}
+        >
+          Lea Collins
+        </option>
+        <option
+          value={2}
+        >
+          Kent Elmer
+        </option>
+        <option
+          value={3}
+        >
+          PJ Valentini
+        </option>
+        <option
+          value={4}
+        >
+          Paula Speakman
+        </option>
+        <option
+          value={5}
+        >
+          Robert Blackstone
+        </option>
+        <option
+          value={6}
+        >
+          Adam Cornett
+        </option>
+        <option
+          value={7}
+        >
+          Dan Jewell
+        </option>
+        <option
+          value={8}
+        >
+          Jeff Riedinger
+        </option>
+        <option
+          value={9}
+        >
+          Diva Payne
+        </option>
+        <option
+          value={10}
+        >
+          Amy Johnson
+        </option>
+      </select>
+    </div>
+  </div>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    type="submit"
+  >
+    Save
+  </button>
+</form>
+`;
+
+exports[`sets save button label to 'Saving...' when saving is true 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <h2>
+    Edit
+     Contact
+  </h2>
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <div
+      className="field"
+    >
+      <input
+        className="form-control"
+        name="name"
+        onChange={[MockFunction]}
+        type="text"
+        value="John Doe"
+      />
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="category"
+    >
+      Email
+    </label>
+    <div
+      className="field"
+    >
+      <input
+        className="form-control"
+        name="category"
+        onChange={[MockFunction]}
+        type="text"
+        value="John@Doe.com"
+      />
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="creatorId"
+    >
+      Created By
+    </label>
+    <div
+      className="field"
+    >
+      <select
+        className="form-control"
+        name="creatorId"
+        onChange={[MockFunction]}
+        value={3}
+      >
+        <option
+          value=""
+        >
+          Select Creator
+        </option>
+        <option
+          value={1}
+        >
+          Lea Collins
+        </option>
+        <option
+          value={2}
+        >
+          Kent Elmer
+        </option>
+        <option
+          value={3}
+        >
+          PJ Valentini
+        </option>
+        <option
+          value={4}
+        >
+          Paula Speakman
+        </option>
+        <option
+          value={5}
+        >
+          Robert Blackstone
+        </option>
+        <option
+          value={6}
+        >
+          Adam Cornett
+        </option>
+        <option
+          value={7}
+        >
+          Dan Jewell
+        </option>
+        <option
+          value={8}
+        >
+          Jeff Riedinger
+        </option>
+        <option
+          value={9}
+        >
+          Diva Payne
+        </option>
+        <option
+          value={10}
+        >
+          Amy Johnson
+        </option>
+      </select>
+    </div>
+  </div>
+  <button
+    className="btn btn-primary"
+    disabled={true}
+    type="submit"
+  >
+    Saving...
+  </button>
+</form>
+`;
