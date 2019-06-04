@@ -68,7 +68,7 @@ class ContactsPage extends React.Component {
   }
 }
 
-// we expect dispatch to be passed in to the courses page component.
+// we expect dispatch to be passed in to the contacts page component.
 // it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
 ContactsPage.propTypes = {
   creators: PropTypes.array.isRequired,

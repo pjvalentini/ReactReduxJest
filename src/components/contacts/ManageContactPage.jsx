@@ -24,7 +24,7 @@ export function ManageContactPage({
   ...props // Assign any props not descructured to a var called props with the rest op.
 }) {
   // useState returns a pair of values, we use array destructuring to assign each value a name.
-  // 1st value is the state var, 2nd value is the setter fucntion for that var.
+  // 1st value is the state var, 2nd value is the setter function for that var.
   const [contact, setContact] = useState({ ...props.contact });
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
@@ -35,7 +35,7 @@ export function ManageContactPage({
         alert("Loading Contacts Failed" + error);
       });
     } else {
-      // if we have courses available then we would like to set the state and course passed in on Props.
+      // if we have contacts available then we would like to set the state and contact passed in on Props.
       setContact({ ...props.contact });
     }
 
@@ -44,7 +44,7 @@ export function ManageContactPage({
         alert("Loading Creators Failed" + error);
       });
     }
-  }, [props.contact]); // we want a new state anytime a course is passed in, so we need to add this here or else when loading the page or else the prev state will load and no data will be present.
+  }, [props.contact]); // we want a new state anytime a contact is passed in, so we need to add this here or else when loading the page or else the prev state will load and no data will be present.
 
   function handleChange(e) {
     // destructuring here allow us to retain a local ref to the event.
@@ -68,7 +68,7 @@ export function ManageContactPage({
 
     // set errors will update state if there are any.
     setErrors(errors);
-    // Form is valid sit he error object still has no props.
+    // Form is valid since the error object still has no props.
     // This will return onject of properties if there are errors.
     return Object.keys(errors).length === 0;
   }
@@ -87,7 +87,7 @@ export function ManageContactPage({
         history.push("/contacts");
       })
       .catch(error => {
-        ///here we set save to false since we are going to stay on the page
+        // here we set save to false since we are going to stay on the page
         setSaving(false);
         setErrors({ onSave: error.message }); // comming from the useState() call.
       });
@@ -107,7 +107,7 @@ export function ManageContactPage({
   );
 }
 
-// we expect dispatch to be passed in to the courses page component.
+// we expect dispatch to be passed in to the contacts page component.
 // it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
 ManageContactPage.propTypes = {
   contact: PropTypes.object.isRequired,
@@ -129,7 +129,7 @@ export function getContactBySlug(contacts, slug) {
 function mapStateToProps(state, ownProps) {
   // read the course slug.
   const slug = ownProps.match.params.slug;
-  // if there is a slug AND state.courses.length > 0 => getCourseBySlug otherwise set to newCourse.
+  // if there is a slug AND state.contacts.length > 0 => getContacteBySlug otherwise set to newContact.
   const contact =
     slug && state.contacts.length > 0
       ? getContactBySlug(state.contacts, slug)

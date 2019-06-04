@@ -2,10 +2,10 @@
   "contacts": [
     {
       "id": 1,
-      "name": "James Doehickey",
+      "name": "Bill Doe",
       "slug": "John Doe",
-      "creatorId": 1,
-      "category": "James@Doe.com"
+      "creatorId": 7,
+      "category": "Bill@Doe.com"
     },
     {
       "id": 2,
@@ -46,7 +46,7 @@
       "id": 7,
       "name": "Wilt Chamberlin",
       "slug": "Wilt Chamberlin",
-      "creatorId": 2,
+      "creatorId": 1,
       "category": "wilt@theStilt"
     },
     {
@@ -69,14 +69,6 @@
       "slug": "Scottie Pippen",
       "creatorId": 1,
       "category": "SP@outlook.com"
-    },
-    {
-      "id": 11,
-      "name": "Joe Blow",
-      "creatorId": 4,
-      "category": "joe@blow.com",
-      "createdAt": 1559585507477,
-      "slug": "joe-blow"
     }
   ],
   "creators": [
