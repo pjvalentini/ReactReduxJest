@@ -8,12 +8,12 @@ import { newContact } from "../../../tools/mockData";
 import Spinner from "../common/Spinner.jsx";
 import { toast } from "react-toastify";
 
-// This functional componemt uses react hooks, useEffect allows us to handle state and side effects.
+// This functional component uses react hooks, useEffect allows us to handle state and side effects.
 // useState hook
 // Our form field will need state in order to hold the form field values before they are saved.
-// I dont need to use redux here, Use plain React state foir data only one/few components use like form state.
-// adding export here will allow us to test this directly without using redux's Provider ans store.
-// This exports an un connected version of the component
+// I dont need to use redux here, Use plain React state for data only one/few components use like form state.
+// adding export here will allow us to test this directly without using redux's Provider and store.
+// This exports an un-connected version of the component
 export function ManageContactPage({
   contacts,
   creators,
@@ -47,9 +47,9 @@ export function ManageContactPage({
   }, [props.contact]); // we want a new state anytime a contact is passed in, so we need to add this here or else when loading the page or else the prev state will load and no data will be present.
 
   function handleChange(e) {
-    // destructuring here allow us to retain a local ref to the event.
+    // destructuring here allows us to retain a local ref to the event.
     const { name, value } = e.target;
-    // using functional form of setState (setCourse) so I can safely set new state that is based on the existing state.
+    // using functional form of setState (setContact) so I can safely set new state that is based on the existing state.
     setContact(prevContact => ({
       ...prevContact,
       // JS computed prop syntax allows us to ref a prop via a var.
@@ -57,7 +57,7 @@ export function ManageContactPage({
     }));
   }
 
-  // this function will povide some server side validation
+  // this function will provide some server side validation
   function formIsValid() {
     const { name, creatorId, category } = contact;
     const errors = {};
@@ -69,7 +69,7 @@ export function ManageContactPage({
     // set errors will update state if there are any.
     setErrors(errors);
     // Form is valid since the error object still has no props.
-    // This will return onject of properties if there are errors.
+    // This will return object of properties if there are errors.
     return Object.keys(errors).length === 0;
   }
 
@@ -79,8 +79,8 @@ export function ManageContactPage({
     if (!formIsValid()) return;
     // setSaving is true now as we want to hide the save button while an update is being set.
     setSaving(true);
-    // saveCourse is getting passed in on props, so its bound to dispatch.
-    // saveCourse return a promise so we can use React Router's 'history' object to redirect.
+    // saveContact is getting passed in on props, so its bound to dispatch.
+    // saveContact returns a promise so we can use React Router's 'history' object to redirect.
     saveContact(contact)
       .then(() => {
         toast.success("You have saved your changes!");
@@ -89,7 +89,7 @@ export function ManageContactPage({
       .catch(error => {
         // here we set save to false since we are going to stay on the page
         setSaving(false);
-        setErrors({ onSave: error.message }); // comming from the useState() call.
+        setErrors({ onSave: error.message }); // coming from the useState() call.
       });
   }
 
@@ -108,7 +108,7 @@ export function ManageContactPage({
 }
 
 // we expect dispatch to be passed in to the contacts page component.
-// it will be passed in because connect auto passes dispatch in if we omit "mapDispatchToProps" arg in our call to connect
+// it will be passed in because connect auto passes dispatch in, if we omit "mapDispatchToProps" arg in our call to connect
 ManageContactPage.propTypes = {
   contact: PropTypes.object.isRequired,
   creators: PropTypes.array.isRequired,
@@ -127,9 +127,9 @@ export function getContactBySlug(contacts, slug) {
 // ownProps: additional param that is a reference to the components props.
 // Can be used to read the URL data injected on props by React router.
 function mapStateToProps(state, ownProps) {
-  // read the course slug.
+  // read the contact slug.
   const slug = ownProps.match.params.slug;
-  // if there is a slug AND state.contacts.length > 0 => getContacteBySlug otherwise set to newContact.
+  // if there is a slug AND state.contacts.length > 0 => getContactBySlug otherwise set to newContact.
   const contact =
     slug && state.contacts.length > 0
       ? getContactBySlug(state.contacts, slug)

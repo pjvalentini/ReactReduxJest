@@ -20,7 +20,7 @@ function renderContactForm(args) {
   return render(<ContactForm {...props} />);
 }
 
-// test that CourseForm will render the Add Course header.
+// test that CourseForm will render the Add Contact header.
 it("should render the Add Contact header", () => {
   const { getByText } = renderContactForm();
   // getByText will search through the HTML for the targetted text. Has a built in assertion.

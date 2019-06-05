@@ -3,7 +3,7 @@ import rootReducer from "./reducers";
 import initialState from "./reducers/initialState";
 import * as contactActions from "./actions/contactActions";
 
-// Test to make sure the store is handling creating courses
+// Test to make sure the store is handling creating contacts
 it("should handle creating courses", () => {
   // arrange
   const store = createStore(rootReducer, initialState);

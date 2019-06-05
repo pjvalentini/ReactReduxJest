@@ -1,5 +1,5 @@
 import React from "react";
-// importing the named export here as we csn use this for testing
+// importing the named export here as we can use this for testing
 import { ManageContactPage } from "./ManageContactPage.jsx";
 import { creators, newContact, contacts } from "../../../tools/mockData";
 import { mount } from "enzyme";
