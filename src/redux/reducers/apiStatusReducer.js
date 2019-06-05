@@ -1,7 +1,7 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
-// helper function to detmine if the api call will end in success usign substring
+// helper function to detmine if the api call will end in success using substring
 function actionTypeEndsInSuccess(type) {
   return type.substring(type.length - 8) === "_SUCCESS";
 }
