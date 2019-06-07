@@ -77,6 +77,6 @@ function createSlug(value) {
 function validateContact(contact) {
   if (!contact.name) return "Name is required.";
   if (!contact.creatorId) return "Creator is required.";
-  if (!contact.category) return "Category is required.";
+  if (!contact.category) return "Email is required.";
   return "";
 }

@@ -10,6 +10,7 @@ import Spinner from "../common/Spinner.jsx";
 import { toast } from "react-toastify";
 
 class ContactsPage extends React.Component {
+  // using class property here, babel will add a constructor when transpiling.
   state = {
     redirectToAddCoursePage: false
   };

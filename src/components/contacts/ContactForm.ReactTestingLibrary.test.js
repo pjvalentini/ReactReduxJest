@@ -34,6 +34,6 @@ it("labels save button as Save when not saving", () => {
 
 it("labels save button as Saving... when saving", () => {
   const { getByText, debug } = renderContactForm({ saving: true });
-  // debug(); // i can see my output from the call to render.
+  debug(); // i can see my output from the call to render.
   getByText("Saving...");
 });

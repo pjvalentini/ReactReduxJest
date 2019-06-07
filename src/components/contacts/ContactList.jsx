@@ -23,10 +23,12 @@ const ContactList = ({ contacts, onDeleteClick }) => (
               </Link>
             </td>
             <td>
-              <Link to={"/contact/" + contact.slug}>{contact.name}</Link>
+              <Link to={"/contact/" + contact.slug} className="name">
+                {contact.name}
+              </Link>
             </td>
-            <td>{contact.category}</td>
-            <td>{contact.creatorName}</td>
+            <td className="email">{contact.category}</td>
+            <td className="creator">{contact.creatorName}</td>
             <td>
               <button
                 className="btn btn-outline-danger"
